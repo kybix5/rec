@@ -110,117 +110,63 @@ class _MyWeatherPageState extends State<MyWeatherPage> {
                 title: Text(widget.title),
               ),
               body: Center(
-                child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    ElevatedButton(
-                      onPressed: update,
-                      child: const Text('Обновить'),
-                    ),
-                    Expanded(
-                      child: SingleChildScrollView(
-                          child: Column(
-                        children: [
-                          for (final word in tableObjsJson)
-                            Column(
-                              children: [
-                                ListTile(
-                                  //leading: CircleAvatar(child: Text('C')),
-                                  title: Text(
-                                    word["city"] as String,
-                                    style: const TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  subtitle: Row(
-                                    //mainAxisAlignment:MainAxisAlignment.center, //центру
-                                    children: [
-                                      Text(
-                                        word["temperature"] as String,
-                                        style: TextStyle(fontSize: 24),
-                                      ),
-                                      Text(
-                                        word["short"] as String,
-                                        style: const TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                    ],
-                                  ),
-                                  //trailing: Icon(Icons.favorite_rounded),
-                                  //isThreeLine: true,
-                                  onTap: () {
-                                    AlertDialog alert = AlertDialog(
-                                      title: Text(
-                                        word["short"],
-                                        style: TextStyle(fontSize: 14),
-                                      ),
-                                    );
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return alert;
-                                      },
-                                    );
-                                  },
-                                ),
-                                const Divider(
-                                  //height: 20,
-                                  indent: 0,
-                                  endIndent: 0,
-                                  color: Colors.black,
-                                  //thickness: 2,
-                                ),
-                              ],
+                child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: tableObjsJson.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Card(
+                        child: Column(
+                          children: [
+                            Text(
+                              tableObjsJson[index]["city"] as String,
+                              style: const TextStyle(
+                                  fontSize: 24, fontWeight: FontWeight.bold),
                             ),
-                        ],
-                      )),
-                    ),
-                  ],
-                ),
+                            ListTile(
+                              //leading: CircleAvatar(child: Text('C')),
+                              title: Center(
+                                child: Text(
+                                  tableObjsJson[index]["temperature"] as String,
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              subtitle: Row(
+                                children: [
+                                  Text(
+                                    tableObjsJson[index]["short"] as String,
+                                    style: const TextStyle(fontSize: 8),
+                                  ),
+                                  Text(
+                                    tableObjsJson[index]["short"] as String,
+                                    style: const TextStyle(fontSize: 8),
+                                  ),
+                                ],
+                              ),
+                              //trailing: Icon(Icons.favorite_rounded),
+                              //isThreeLine: true,
+                              onTap: () {
+                                AlertDialog alert = AlertDialog(
+                                  title: Text(
+                                    tableObjsJson[index]["short"] as String,
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                );
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    }),
               ),
-              bottomNavigationBar: BottomNavigationBar(
-                type: BottomNavigationBarType.shifting,
-                selectedFontSize: 20,
-                selectedIconTheme: IconThemeData(color: Colors.amberAccent),
-                selectedItemColor: Colors.amberAccent,
-                selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-                items: const <BottomNavigationBarItem>[
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: "Home ",
-                    backgroundColor: Colors.blue,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.camera),
-                    label: "камера",
-                    backgroundColor: Colors.blue,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.elderly_woman_outlined),
-                    label: "Древо",
-                    backgroundColor: Colors.blue,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.fiber_new_sharp),
-                    label: "Новости",
-                    backgroundColor: Colors.blue,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.cloud_queue_outlined),
-                    label: "Погода",
-                    backgroundColor: Colors.blue,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: "settings",
-                    backgroundColor: Colors.blue,
-                  ),
-                ],
-                currentIndex: cout_men,
-                onTap: onItemTapped,
-                // selectedItemColor: Colors.amber[800],
-              ),
+              bottomNavigationBar: NavigationExample(),
             ); // snapshot.data  :- get your object which is pass from your downloadData() function
           }
         }
