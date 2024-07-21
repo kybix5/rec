@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'dart:convert';
+//import 'dart:io';
+//import 'dart:convert';
 
 import 'tree.dart';
 import 'vlc.dart';
@@ -49,8 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void naveel_home() {
     cout_men = 0;
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => MyHomePage(title: 'Анчих')));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const MyHomePage(title: 'Анчих')));
   }
 
   void naveel_news() {
@@ -58,13 +60,15 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => MySecondPage(title: 'Новости')));
+            builder: (context) => const MySecondPage(title: 'Новости')));
   }
 
   void naveel_camera() {
     cout_men = 1;
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => MyThirdPage(title: 'Камера')));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const MyThirdPage(title: 'Камера')));
   }
 
   void naveel_tree() {
@@ -72,7 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => MyFourPage(title: 'Генеалогическое древо')));
+            builder: (context) =>
+                const MyFourPage(title: 'Генеалогическое древо')));
   }
 
   void naveel_weather() {
@@ -80,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => MyWeatherPage(title: 'Погода')));
+            builder: (context) => const MyWeatherPage(title: 'Погода')));
   }
 
   void onItemTapped(index) {
@@ -148,13 +153,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Ink.image(
-                              image: NetworkImage(
+                              image: const NetworkImage(
                                 "https://parik123.nethouse.ru/static/img/0000/0007/4203/74203883.jjd8539p5b.W665.jpg",
                               ),
                               height: height / 4,
                               width: width / 3,
                             ),
-                            Text(
+                            const Text(
                               'Камера',
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
@@ -185,13 +190,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Ink.image(
-                              image: NetworkImage(
+                              image: const NetworkImage(
                                 "https://flomaster.top/uploads/posts/2023-10/1697495070_flomaster-top-p-drevo-rodoslovnoe-risunok-instagram-2.jpg",
                               ),
                               height: height / 4,
                               width: width / 3,
                             ),
-                            Text(
+                            const Text(
                               'Древо',
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
@@ -234,13 +239,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Ink.image(
-                              image: NetworkImage(
+                              image: const NetworkImage(
                                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlsFj9c_fnn37WyQR0aqNNb3o3rRvjc9SYqhlKFMywtjbjrcIxJHLxsJs2akLOL7HvxJo&usqp=CAU",
                               ),
                               height: height / 4,
                               width: width / 3,
                             ),
-                            Text(
+                            const Text(
                               'Новости',
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
@@ -271,13 +276,13 @@ class _MyHomePageState extends State<MyHomePage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Ink.image(
-                              image: NetworkImage(
+                              image: const NetworkImage(
                                 "https://play-lh.googleusercontent.com/yXfCpQijMAa6f4thnannzhFNXsk9w-uj0W6rOM4hPaZ2pGqClRDWSfMk4yYzqtqR1-FH",
                               ),
                               height: height / 4,
                               width: width / 3,
                             ),
-                            Text(
+                            const Text(
                               'Погода',
                               style:
                                   TextStyle(fontSize: 20, color: Colors.white),
@@ -293,48 +298,114 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        selectedFontSize: 20,
-        selectedIconTheme: IconThemeData(color: Colors.amberAccent),
-        selectedItemColor: Colors.amberAccent,
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home ",
-            backgroundColor: Colors.blue,
+      bottomNavigationBar: NavigationExample(),
+    );
+  }
+}
+
+class NavigationExample extends StatefulWidget {
+  const NavigationExample({super.key});
+
+  @override
+  State<NavigationExample> createState() => _NavigationExampleState();
+}
+
+class _NavigationExampleState extends State<NavigationExample> {
+  void naveel_home() {
+    cout_men = 0;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const MyHomePage(title: 'Анчих')));
+  }
+
+  void naveel_news() {
+    cout_men = 3;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const MySecondPage(title: 'Новости')));
+  }
+
+  void naveel_camera() {
+    cout_men = 1;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const MyThirdPage(title: 'Камера')));
+  }
+
+  void naveel_tree() {
+    cout_men = 2;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                const MyFourPage(title: 'Генеалогическое древо')));
+  }
+
+  void naveel_weather() {
+    cout_men = 4;
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => const MyWeatherPage(title: 'Погода')));
+  }
+
+  void onItemTapped(index) {
+    cout_men = index;
+    if (index == 0) {
+      naveel_home();
+    } else if (index == 1) {
+      naveel_camera();
+    } else if (index == 2) {
+      naveel_tree();
+    } else if (index == 3) {
+      naveel_news();
+    } else if (index == 4) {
+      naveel_weather();
+    }
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return NavigationBar(
+      onDestinationSelected: (int index) {
+        onItemTapped(index);
+      },
+      indicatorColor: Colors.amber,
+      selectedIndex: cout_men,
+      destinations: const <Widget>[
+        NavigationDestination(
+          selectedIcon: Icon(Icons.home),
+          icon: Icon(Icons.home_outlined),
+          label: 'Home',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.camera),
+          label: 'Камера',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.elderly_woman_outlined),
+          label: 'Древо',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.fiber_new_sharp),
+          label: 'Новости',
+        ),
+        NavigationDestination(
+          icon: Icon(Icons.cloud_queue_outlined),
+          label: 'Погода',
+        ),
+        NavigationDestination(
+          icon: Badge(
+            label: Text('2'),
+            child: Icon(Icons.messenger_sharp),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.camera),
-            label: "камера",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.elderly_woman_outlined),
-            label: "Древо",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fiber_new_sharp),
-            label: "Новости",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.cloud_queue_outlined),
-            label: "Погода",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "settings",
-            backgroundColor: Colors.blue,
-          ),
-        ],
-        currentIndex: cout_men,
-        onTap: onItemTapped,
-        // selectedItemColor: Colors.amber[800],
-      ),
+          label: 'смс',
+        ),
+      ],
     );
   }
 }

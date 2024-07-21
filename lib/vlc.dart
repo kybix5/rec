@@ -132,48 +132,7 @@ class _MyThirdPageState extends State<MyThirdPage> {
           )
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
-        selectedFontSize: 20,
-        selectedIconTheme: IconThemeData(color: Colors.amberAccent),
-        selectedItemColor: Colors.amberAccent,
-        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home ",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.camera),
-            label: "камера",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.elderly_woman_outlined),
-            label: "Древо",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fiber_new_sharp),
-            label: "Новости",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.cloud_queue_outlined),
-            label: "Погода",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "settings",
-            backgroundColor: Colors.blue,
-          ),
-        ],
-        currentIndex: cout_men,
-        onTap: onItemTapped,
-        // selectedItemColor: Colors.amber[800],
-      ),
+      bottomNavigationBar: NavigationExample(),
     );
   }
 }
