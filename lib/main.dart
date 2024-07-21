@@ -380,15 +380,15 @@ class _NavigationExampleState extends State<NavigationExample> {
         NavigationDestination(
           selectedIcon: Icon(Icons.home),
           icon: Icon(Icons.home_outlined),
-          label: 'Home',
+          label: 'Home1',
         ),
         NavigationDestination(
           icon: Icon(Icons.camera),
-          label: 'Камера',
+          label: 'Камера1',
         ),
         NavigationDestination(
           icon: Icon(Icons.elderly_woman_outlined),
-          label: 'Древо',
+          label: 'Древо1',
         ),
         NavigationDestination(
           icon: Icon(Icons.fiber_new_sharp),
@@ -396,14 +396,14 @@ class _NavigationExampleState extends State<NavigationExample> {
         ),
         NavigationDestination(
           icon: Icon(Icons.cloud_queue_outlined),
-          label: 'Погода',
+          label: 'Погода1',
         ),
         NavigationDestination(
           icon: Badge(
             label: Text('2'),
             child: Icon(Icons.messenger_sharp),
           ),
-          label: 'смс',
+          label: 'смс1',
         ),
       ],
     );
