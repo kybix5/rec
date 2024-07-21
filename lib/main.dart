@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 //import 'dart:io';
 //import 'dart:convert';
@@ -121,9 +122,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
           //Padding ( padding: EdgeInsets.all(40))
-          child: Stack(children: <Widget>[
+          child: Stack(
+            fit:StackFit.expand,
+            children: <Widget>[
          Image(
-          image: AssetImage('assets/images/anchih1.jpg'),
+          image: AssetImage('assets/images/gory.jpg'),
           width: width ,
           height: height ,
           fit: BoxFit.fill,
@@ -164,11 +167,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               children: [
                                 Ink.image(
                                   image: const NetworkImage(
-                                    'https://3.bp.blogspot.com/_rkqjUhRTh0Y/StrHqeBpvdI/AAAAAAAAAGA/tS-1zIiTf5Q/s200/DCS-2121.JPG',
+                                    'https://parik123.nethouse.ru/static/img/0000/0007/4203/74203883.jjd8539p5b.W665.jpg',
                                   ),
                                   height: height / 3,
                                   width: width / 2.5,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fill,
                                 ),
                                 const Text(
                                   'Камера',
@@ -213,7 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ),
                                   height: height / 3,
                                   width: width / 2.5,
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fill,
                                 ),
                                 const Text(
                                   'Древо',
