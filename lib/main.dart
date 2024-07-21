@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 //import 'dart:io';
 //import 'dart:convert';
 
@@ -139,33 +140,41 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   Container(
-                    width: width / 2.5,
-                    height: height / 3,
+                    //width: width / 2.5,
+                    //height: height / 3,
                     child: Material(
-                      color: Colors.blue,
-                      elevation: 8,
+                      color: Colors.yellow,
+                      elevation: 100,
+                      shadowColor: Colors.blue,                      
                       borderRadius: BorderRadius.circular(28),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: InkWell(
-                        splashColor: Colors.black,
-                        onTap: naveel_camera,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Ink.image(
-                              image: const NetworkImage(
-                                "https://parik123.nethouse.ru/static/img/0000/0007/4203/74203883.jjd8539p5b.W665.jpg",
-                              ),
-                              height: height / 4,
-                              width: width / 3,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter, //Here
+                        children: [
+                          InkWell(
+                            onTap: naveel_camera,
+                            child: Column(
+                              children: [
+                                Ink.image(
+                                  image: const NetworkImage(
+                                    'https://parik123.nethouse.ru/static/img/0000/0007/4203/74203883.jjd8539p5b.W665.jpg',
+                                  ),
+                                  height: height / 3,
+                                  width: width / 2.5,
+                                  fit: BoxFit.cover,
+                                ),
+                                const Text(
+                                  'Камера',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const Text(
-                              'Камера',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -400,7 +409,7 @@ class _NavigationExampleState extends State<NavigationExample> {
         ),
         NavigationDestination(
           icon: Badge(
-            label: Text('2'),
+            label: Text('new'),
             child: Icon(Icons.messenger_sharp),
           ),
           label: 'смс',
