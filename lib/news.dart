@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
@@ -130,9 +131,42 @@ class _MySecondPageState extends State<MySecondPage> {
                         //isThreeLine: true,
                         onTap: () {
                           AlertDialog alert = AlertDialog(
-                            title: Text(
-                              tableObjsJson[index]["full_news"],
-                              style: const TextStyle(fontSize: 14),
+                            title: Column(
+                              children: [
+                                SingleChildScrollView(
+                                  controller: ScrollController(),
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: [
+                                      Card(
+                                        child: Image(
+                                          image: const NetworkImage(
+                                            'http://r.mtdata.ru/c100x100/u26/photo0C7F/20417090821-0/original.jpg',
+                                          ),
+                                        ),
+                                      ),
+                                      Card(
+                                        child: Image(
+                                          image: const NetworkImage(
+                                            'http://r.mtdata.ru/c100x100/u26/photo0C7F/20417090821-0/original.jpg',
+                                          ),
+                                        ),
+                                      ),
+                                      Card(
+                                        child: Image(
+                                          image: const NetworkImage(
+                                            'http://r.mtdata.ru/c100x100/u26/photo0C7F/20417090821-0/original.jpg',
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Text(
+                                  tableObjsJson[index]["full_news"],
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                              ],
                             ),
                           );
                           showDialog(

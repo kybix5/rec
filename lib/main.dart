@@ -122,13 +122,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
           //Padding ( padding: EdgeInsets.all(40))
-          child: Stack(
-            fit:StackFit.expand,
-            children: <Widget>[
-         Image(
+          child: Stack(fit: StackFit.expand, children: <Widget>[
+        Image(
           image: AssetImage('assets/images/gory.jpg'),
-          width: width ,
-          height: height ,
+          width: width,
+          height: height,
           fit: BoxFit.fill,
         ),
         Column(
