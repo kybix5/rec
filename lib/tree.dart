@@ -113,34 +113,52 @@ class _MyFourPageState extends State<MyFourPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: TextField(
-          controller: _search,
-          onChanged: onQueryChanged,
-          cursorColor: Colors.grey,
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            filled: true,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide.none),
-            hintText: 'Поиск..',
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-            prefixIcon: Container(
-              padding: EdgeInsets.all(15),
-              child: Icon(Icons.search),
-              width: 12,
-              height: 5,
-            ),
-          ),
+        title: Center(
+          child: Text(widget.title),
         ),
       ),
-      body: _ListBuilderState(),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: ListBuilderState(),
+          ),
+          TextField(
+            controller: _search,
+            onChanged: onQueryChanged,
+            cursorColor: Colors.grey,
+            decoration: InputDecoration(
+              fillColor: Colors.white,
+              filled: true,
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none),
+              hintText: 'Поиск..',
+              hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+              prefixIcon: Container(
+                padding: EdgeInsets.all(15),
+                child: Icon(Icons.search),
+                width: 12,
+                height: 5,
+              ),
+            ),
+          ),
+        ],
+      ),
+
+      //ListBuilderState(),
       bottomNavigationBar: NavigationExample(),
     );
   }
 }
 
-class _ListBuilderState extends StatelessWidget {
+class ListBuilderState extends StatefulWidget {
+  const ListBuilderState({super.key});
+
+  @override
+  State<ListBuilderState> createState() => _ListBuilderState();
+}
+
+class _ListBuilderState extends State<ListBuilderState> {
   Future<String> download() async {
     if (tableObjsJson.length > 1) {
       return Future.value("Data download"); // return your response
@@ -239,16 +257,20 @@ class _alert_list extends StatelessWidget {
                     children: [
                       Text(obj_person[0]["name"]),
                       //for (final word in obj_person)
-                      for (var i = 1; i <= obj_person.length-1; i++)
+                      for (var i = 1; i <= obj_person.length - 1; i++)
                         Card(
                           child: Column(
                             children: [
                               Row(
                                 children: [
                                   Text(obj_person[i]["kinship"]),
-                                  const SizedBox(width: 10,),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(obj_person[i]["name"]),
-                                  const SizedBox(width: 10,),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
                                   InkWell(
                                     child: const Icon(Icons.info),
                                     onTap: () {
