@@ -120,8 +120,15 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Center(
-        //Padding ( padding: EdgeInsets.all(40))
-        child: Column(
+          //Padding ( padding: EdgeInsets.all(40))
+          child: Stack(children: <Widget>[
+         Image(
+          image: AssetImage('assets/images/anchih1.jpg'),
+          width: width ,
+          height: height ,
+          fit: BoxFit.fill,
+        ),
+        Column(
           //mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(
@@ -143,9 +150,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     //width: width / 2.5,
                     //height: height / 3,
                     child: Material(
-                      color: Colors.yellow,
+                      color: Colors.purple,
                       elevation: 100,
-                      shadowColor: Colors.blue,                      
+                      shadowColor: Colors.blue,
                       borderRadius: BorderRadius.circular(28),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: Stack(
@@ -157,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               children: [
                                 Ink.image(
                                   image: const NetworkImage(
-                                    'https://parik123.nethouse.ru/static/img/0000/0007/4203/74203883.jjd8539p5b.W665.jpg',
+                                    'https://3.bp.blogspot.com/_rkqjUhRTh0Y/StrHqeBpvdI/AAAAAAAAAGA/tS-1zIiTf5Q/s200/DCS-2121.JPG',
                                   ),
                                   height: height / 3,
                                   width: width / 2.5,
@@ -185,33 +192,41 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   Container(
-                    width: width / 2.5,
-                    height: height / 3,
+                    //width: width / 2.5,
+                    //height: height / 3,
                     child: Material(
-                      color: Colors.blue,
-                      elevation: 8,
+                      color: Colors.yellow,
+                      elevation: 100,
+                      shadowColor: Colors.blue,
                       borderRadius: BorderRadius.circular(28),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: InkWell(
-                        splashColor: Colors.black,
-                        onTap: naveel_tree,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Ink.image(
-                              image: const NetworkImage(
-                                "https://flomaster.top/uploads/posts/2023-10/1697495070_flomaster-top-p-drevo-rodoslovnoe-risunok-instagram-2.jpg",
-                              ),
-                              height: height / 4,
-                              width: width / 3,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter, //Here
+                        children: [
+                          InkWell(
+                            onTap: naveel_tree,
+                            child: Column(
+                              children: [
+                                Ink.image(
+                                  image: const NetworkImage(
+                                    'https://flomaster.top/uploads/posts/2023-10/1697495070_flomaster-top-p-drevo-rodoslovnoe-risunok-instagram-2.jpg',
+                                  ),
+                                  height: height / 3,
+                                  width: width / 2.5,
+                                  fit: BoxFit.cover,
+                                ),
+                                const Text(
+                                  'Древо',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const Text(
-                              'Древо',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -306,7 +321,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      ),
+      ])),
       bottomNavigationBar: NavigationExample(),
     );
   }
