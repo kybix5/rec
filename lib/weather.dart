@@ -117,40 +117,47 @@ class _MyWeatherPageState extends State<MyWeatherPage> {
                       return Card(
                         child: Column(
                           children: [
-                            Text(
-                              tableObjsJson[index]["city"] as String,
-                              style: const TextStyle(
-                                  fontSize: 24, fontWeight: FontWeight.bold),
-                            ),
                             ListTile(
                               //leading: CircleAvatar(child: Text('C')),
-                              title: Center(
-                                child: Text(
-                                  tableObjsJson[index]["temperature"] as String,
-                                  style: const TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                              subtitle: Row(
+                              title: Column(
                                 children: [
                                   Text(
-                                    tableObjsJson[index]["short"] as String,
-                                    style: const TextStyle(fontSize: 8),
+                                    tableObjsJson[index]["city"] as String,
+                                    style: const TextStyle(
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    tableObjsJson[index]["short"] as String,
-                                    style: const TextStyle(fontSize: 8),
+                                    tableObjsJson[index]["temperature"]
+                                        as String,
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                 ],
                               ),
+                              subtitle: Center(
+                                child: Text(
+                                  tableObjsJson[index]["short"] as String,
+                                  style: const TextStyle(fontSize: 8),
+                                ),
+                              ),
+
                               //trailing: Icon(Icons.favorite_rounded),
                               //isThreeLine: true,
                               onTap: () {
                                 AlertDialog alert = AlertDialog(
-                                  title: Text(
-                                    tableObjsJson[index]["short"] as String,
-                                    style: const TextStyle(fontSize: 14),
+                                  title: Column(
+                                    children: [
+                                       Text(
+                                        tableObjsJson[index]["temperature"] as String,
+                                        style: const TextStyle(fontSize: 24),
+                                      ),                                     
+                                      Text(
+                                        tableObjsJson[index]["short"] as String,
+                                        style: const TextStyle(fontSize: 24),
+                                      ),
+                                    ],
                                   ),
                                 );
                                 showDialog(
