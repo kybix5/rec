@@ -167,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   image: const NetworkImage(
                                     'https://parik123.nethouse.ru/static/img/0000/0007/4203/74203883.jjd8539p5b.W665.jpg',
                                   ),
-                                  height: height / 3,
+                                  height: height / 4,
                                   width: width / 2.5,
                                   fit: BoxFit.fill,
                                 ),
@@ -212,7 +212,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   image: const NetworkImage(
                                     'https://flomaster.top/uploads/posts/2023-10/1697495070_flomaster-top-p-drevo-rodoslovnoe-risunok-instagram-2.jpg',
                                   ),
-                                  height: height / 3,
+                                  height: height / 4,
                                   width: width / 2.5,
                                   fit: BoxFit.fill,
                                 ),
@@ -250,33 +250,41 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   Container(
-                    width: width / 2.5,
-                    height: height / 3,
+                    //width: width / 2.5,
+                    //height: height / 3,
                     child: Material(
-                      color: Colors.blue,
-                      elevation: 8,
+                      color: Colors.yellow,
+                      elevation: 100,
+                      shadowColor: Colors.blue,
                       borderRadius: BorderRadius.circular(28),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: InkWell(
-                        splashColor: Colors.black,
-                        onTap: naveel_news,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Ink.image(
-                              image: const NetworkImage(
-                                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlsFj9c_fnn37WyQR0aqNNb3o3rRvjc9SYqhlKFMywtjbjrcIxJHLxsJs2akLOL7HvxJo&usqp=CAU",
-                              ),
-                              height: height / 4,
-                              width: width / 3,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter, //Here
+                        children: [
+                          InkWell(
+                            onTap: naveel_news,
+                            child: Column(
+                              children: [
+                                Ink.image(
+                                  image: const NetworkImage(
+                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlsFj9c_fnn37WyQR0aqNNb3o3rRvjc9SYqhlKFMywtjbjrcIxJHLxsJs2akLOL7HvxJo&usqp=CAU',
+                                  ),
+                                  height: height / 4,
+                                  width: width / 2.5,
+                                  fit: BoxFit.fill,
+                                ),
+                                const Text(
+                                  'Новости',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const Text(
-                              'Новости',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -287,33 +295,41 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   Container(
-                    width: width / 2.5,
-                    height: height / 3,
+                    //width: width / 2.5,
+                    //height: height / 3,
                     child: Material(
-                      color: Colors.blue,
-                      elevation: 8,
+                      color: Colors.yellow,
+                      elevation: 100,
+                      shadowColor: Colors.blue,
                       borderRadius: BorderRadius.circular(28),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: InkWell(
-                        splashColor: Colors.black,
-                        onTap: naveel_weather,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Ink.image(
-                              image: const NetworkImage(
-                                "https://play-lh.googleusercontent.com/yXfCpQijMAa6f4thnannzhFNXsk9w-uj0W6rOM4hPaZ2pGqClRDWSfMk4yYzqtqR1-FH",
-                              ),
-                              height: height / 4,
-                              width: width / 3,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter, //Here
+                        children: [
+                          InkWell(
+                            onTap: naveel_weather,
+                            child: Column(
+                              children: [
+                                Ink.image(
+                                  image: const NetworkImage(
+                                    'https://play-lh.googleusercontent.com/yXfCpQijMAa6f4thnannzhFNXsk9w-uj0W6rOM4hPaZ2pGqClRDWSfMk4yYzqtqR1-FH',
+                                  ),
+                                  height: height / 4,
+                                  width: width / 2.5,
+                                  fit: BoxFit.fill,
+                                ),
+                                const Text(
+                                  'Погода',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ],
                             ),
-                            const Text(
-                              'Погода',
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
