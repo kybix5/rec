@@ -279,23 +279,33 @@ class _alert_list extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(obj_person[0]["name"]),
-                      for (final word in obj_person)
+                      //for (final word in obj_person)
+                      for (var i = 1; i <= obj_person.length-1; i++)
                         Card(
-                          child: Row(
+                          child: Column(
                             children: [
-                              Text(word["kinship"]),
-                              SizedBox(width: 30,),
-                              Text(word["name"]),
-                              SizedBox(width: 30,),
-                              InkWell(
-                                child: Icon(Icons.info),
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return _alert_list(word["n_id"]);
-                                      });
-                                },
+                              Row(
+                                children: [
+                                  Text(obj_person[i]["kinship"]),
+                                  const SizedBox(width: 10,),
+                                  Text(obj_person[i]["name"]),
+                                  const SizedBox(width: 10,),
+                                  InkWell(
+                                    child: const Icon(Icons.info),
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return _alert_list(
+                                                obj_person[i]["n_id"]);
+                                          });
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                obj_person[i]["birthday"],
+                                style: const TextStyle(fontSize: 10),
                               ),
                             ],
                           ),
