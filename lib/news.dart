@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+
 import 'dart:io';
 import 'dart:convert';
 
@@ -20,9 +22,9 @@ class MySecondPage extends StatefulWidget {
 
 class _MySecondPageState extends State<MySecondPage> {
   static String arrayObjsT = '{"news": []}';
+  var size_n, height_n, width_n;
 
   var tableObjsJson = jsonDecode(arrayObjsT)['news'] as List;
-
 
   Future<String> download() async {
     var getdata = false;
@@ -40,6 +42,10 @@ class _MySecondPageState extends State<MySecondPage> {
 
   @override
   Widget build(BuildContext context) {
+    size_n = MediaQuery.of(context).size;
+    height_n = size_n.height;
+    width_n = size_n.width;
+
     return FutureBuilder<String>(
       future: download(), // function where you call your api
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
@@ -77,39 +83,48 @@ class _MySecondPageState extends State<MySecondPage> {
                           AlertDialog alert = AlertDialog(
                             title: Column(
                               children: [
-                                SingleChildScrollView(
-                                  controller: ScrollController(),
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: [
-                                      Card(
-                                        child: Image(
-                                          image: const NetworkImage(
-                                            'http://r.mtdata.ru/c100x100/u26/photo0C7F/20417090821-0/original.jpg',
+                                CarouselSlider(
+                                  items: [
+                                    for (var i = 0;
+                                        i <= tableObjsJson[index]["jpg"].length-1;i++)
+                                      Container(
+                                        margin: EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                                tableObjsJson[index]["jpg"][i]),
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
-                                      Card(
-                                        child: Image(
-                                          image: const NetworkImage(
-                                            'http://r.mtdata.ru/c100x100/u26/photo0C7F/20417090821-0/original.jpg',
-                                          ),
-                                        ),
-                                      ),
-                                      Card(
-                                        child: Image(
-                                          image: const NetworkImage(
-                                            'http://r.mtdata.ru/c100x100/u26/photo0C7F/20417090821-0/original.jpg',
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                  ],
+                                  options: CarouselOptions(
+                                    height: height_n / 4,
+                                    enlargeCenterPage: true,
+                                    autoPlay: true,
+                                    aspectRatio: 16 / 9,
+                                    autoPlayCurve: Curves.fastOutSlowIn,
+                                    enableInfiniteScroll: true,
+                                    autoPlayAnimationDuration:
+                                        Duration(milliseconds: 800),
+                                    viewportFraction: 0.8,
                                   ),
                                 ),
-                                Text(
-                                  tableObjsJson[index]["full_news"],
-                                  style: const TextStyle(fontSize: 14),
-                                ),
+                                Container(
+                                  height: height_n / 2,
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          tableObjsJson[index]["full_news"],
+                                          style: const TextStyle(fontSize: 10),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                           );
