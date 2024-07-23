@@ -22,8 +22,8 @@ class _MyThirdPageState extends State<MyThirdPage> {
 
   final VlcPlayerController _videoPlayerController =
       VlcPlayerController.network(
-    'https://media.w3.org/2010/05/sintel/trailer.mp4',
-    //'rtsp://46.16.226.6:554/user=user&password=&channel=1&stream=0',
+    //'https://media.w3.org/2010/05/sintel/trailer.mp4',
+    'rtsp://46.16.226.6:554/user=user&password=&channel=1&stream=0',
     hwAcc: HwAcc.full,
     autoPlay: true,
     options: VlcPlayerOptions(),
