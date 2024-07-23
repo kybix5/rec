@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vlc_player/flutter_vlc_player.dart';
-//import 'package:flutter_vlc_player/src/vlc_player_controller.dart';
+
 
 import 'main.dart';
 import 'tree.dart';
@@ -133,6 +133,7 @@ class _MyThirdPageState extends State<MyThirdPage> {
         ],
       ),
       bottomNavigationBar: NavigationExample(),
+
     );
   }
 }
