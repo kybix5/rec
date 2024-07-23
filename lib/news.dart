@@ -23,62 +23,6 @@ class _MySecondPageState extends State<MySecondPage> {
 
   var tableObjsJson = jsonDecode(arrayObjsT)['news'] as List;
 
-  void update() async {
-    setState(() {});
-  }
-
-  void naveel_home() {
-    cout_men = 0;
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => MyHomePage(title: 'Анчих')));
-  }
-
-  void naveel_news() {
-    cout_men = 3;
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MySecondPage(title: 'Новости')));
-  }
-
-  void naveel_camera() {
-    cout_men = 1;
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => MyThirdPage(title: 'Камера')));
-  }
-
-  void naveel_tree() {
-    cout_men = 2;
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MyFourPage(title: 'Генеалогическое древо')));
-  }
-
-  void naveel_weather() {
-    cout_men = 4;
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => MyWeatherPage(title: 'Погода')));
-  }
-
-  void onItemTapped(index) {
-    cout_men = index;
-
-    if (index == 0) {
-      naveel_home();
-    } else if (index == 1) {
-      naveel_camera();
-    } else if (index == 2) {
-      naveel_tree();
-    } else if (index == 3) {
-      naveel_news();
-    } else if (index == 4) {
-      naveel_weather();
-    }
-    setState(() {});
-  }
 
   Future<String> download() async {
     var getdata = false;
