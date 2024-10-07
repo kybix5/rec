@@ -30,7 +30,6 @@ class _MyFourPageState extends State<MyFourPage> {
 
   //var tableObjsJson = jsonDecode(arrayObjsT)['table'] as List;
 
-
   //var tableTemp = jsonDecode(arrayObjsT)['table'] as List;
 
   void onQueryChanged(String query) {
@@ -111,8 +110,8 @@ class _ListBuilderState extends State<ListBuilderState> {
     if (tableObjsJson.length > 1) {
       return Future.value("Data download"); // return your response
     } else {
-      var request = await HttpClient()
-          .getUrl(Uri.parse('http://45.140.19.137/webtrees/api'));
+      var request =
+          await HttpClient().getUrl(Uri.parse('https://anchih.e-rec.ru/api'));
       // sends the request
       var response = await request.close();
       // transforms and prints the response
@@ -177,7 +176,7 @@ class _alert_list extends StatelessWidget {
 
   Future<String> get_person() async {
     var request = await HttpClient().getUrl(
-        Uri.parse('http://45.140.19.137/webtrees/api/person?id=' + id_person));
+        Uri.parse('https://anchih.e-rec.ru/api/person?id=' + id_person));
     // sends the request
     var response = await request.close();
     // transforms and prints the response

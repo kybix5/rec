@@ -22,11 +22,10 @@ class _MyWeatherPageState extends State<MyWeatherPage> {
 
   var tableObjsJson = jsonDecode(arrayObjsT)['weather'] as List;
 
-
   Future<String> download() async {
     var getdata = false;
     var request = await HttpClient()
-        .getUrl(Uri.parse('http://45.140.19.137/webtrees/api/weather'));
+        .getUrl(Uri.parse('https://anchih.e-rec.ru/api/weather'));
     // sends the request
     var response = await request.close();
     // transforms and prints the response
@@ -94,10 +93,11 @@ class _MyWeatherPageState extends State<MyWeatherPage> {
                                 AlertDialog alert = AlertDialog(
                                   title: Column(
                                     children: [
-                                       Text(
-                                        tableObjsJson[index]["temperature"] as String,
+                                      Text(
+                                        tableObjsJson[index]["temperature"]
+                                            as String,
                                         style: const TextStyle(fontSize: 24),
-                                      ),                                     
+                                      ),
                                       Text(
                                         tableObjsJson[index]["short"] as String,
                                         style: const TextStyle(fontSize: 24),

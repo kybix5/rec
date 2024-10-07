@@ -29,7 +29,7 @@ class _MySecondPageState extends State<MySecondPage> {
   Future<String> download() async {
     var getdata = false;
     var request = await HttpClient()
-        .getUrl(Uri.parse('http://45.140.19.137/webtrees/api/news'));
+        .getUrl(Uri.parse('https://anchih.e-rec.ru/api/news'));
     // sends the request
     var response = await request.close();
     // transforms and prints the response
@@ -86,7 +86,10 @@ class _MySecondPageState extends State<MySecondPage> {
                                 CarouselSlider(
                                   items: [
                                     for (var i = 0;
-                                        i <= tableObjsJson[index]["jpg"].length-1;i++)
+                                        i <=
+                                            tableObjsJson[index]["jpg"].length -
+                                                1;
+                                        i++)
                                       Container(
                                         margin: EdgeInsets.all(8.0),
                                         decoration: BoxDecoration(
