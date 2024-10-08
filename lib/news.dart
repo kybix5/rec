@@ -80,63 +80,75 @@ class _MySecondPageState extends State<MySecondPage> {
                         //trailing: Icon(Icons.favorite_rounded),
                         //isThreeLine: true,
                         onTap: () {
-                          AlertDialog alert = AlertDialog(
-                            title: Column(
-                              children: [
-                                CarouselSlider(
-                                  items: [
-                                    for (var i = 0;
-                                        i <=
-                                            tableObjsJson[index]["jpg"].length -
-                                                1;
-                                        i++)
-                                      Container(
-                                        margin: EdgeInsets.all(8.0),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10.0),
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                                tableObjsJson[index]["jpg"][i]),
-                                            fit: BoxFit.cover,
+                          if (tableObjsJson[index]["jpg"] != null &&
+                              tableObjsJson[index]["jpg"].isNotEmpty) {
+                            AlertDialog alert = AlertDialog(
+                              title: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    height: height_n /
+                                        4, // Задаем фиксированную высоту
+                                    child: CarouselSlider(
+                                      items: [
+                                        for (var i = 0;
+                                            i <
+                                                tableObjsJson[index]["jpg"]
+                                                    .length;
+                                            i++)
+                                          Container(
+                                            margin: EdgeInsets.all(8.0),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              image: DecorationImage(
+                                                image: NetworkImage(
+                                                    tableObjsJson[index]["jpg"]
+                                                        [i]),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                  ],
-                                  options: CarouselOptions(
-                                    height: height_n / 4,
-                                    enlargeCenterPage: true,
-                                    autoPlay: true,
-                                    aspectRatio: 16 / 9,
-                                    autoPlayCurve: Curves.fastOutSlowIn,
-                                    enableInfiniteScroll: true,
-                                    autoPlayAnimationDuration:
-                                        Duration(milliseconds: 800),
-                                    viewportFraction: 0.8,
-                                  ),
-                                ),
-                                Container(
-                                  height: height_n / 2,
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          tableObjsJson[index]["full_news"],
-                                          style: const TextStyle(fontSize: 10),
-                                        ),
                                       ],
+                                      options: CarouselOptions(
+                                        enlargeCenterPage: true,
+                                        autoPlay: true,
+                                        aspectRatio: 16 / 9,
+                                        autoPlayCurve: Curves.fastOutSlowIn,
+                                        enableInfiniteScroll: true,
+                                        autoPlayAnimationDuration:
+                                            Duration(milliseconds: 800),
+                                        viewportFraction: 0.8,
+                                      ),
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
-                          );
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return alert;
-                            },
-                          );
+                                  Container(
+                                    height: height_n / 4,
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            tableObjsJson[index]["full_news"] ??
+                                                "Нет данных",
+                                            style:
+                                                const TextStyle(fontSize: 10),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return alert;
+                              },
+                            );
+                          } else {
+                            print("Нет изображений для отображения");
+                          }
                         },
                       ),
                     );
