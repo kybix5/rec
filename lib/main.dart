@@ -26,6 +26,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
+int _selectedIndex = 0;
 Widget getWidgetForIndex(int index) {
   switch (index) {
     case 0:
@@ -47,7 +48,9 @@ Widget getWidgetForIndex(int index) {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+
   var size, height, width;
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index; // Обновляем индекс выбранной вкладки

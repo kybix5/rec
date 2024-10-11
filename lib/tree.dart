@@ -46,33 +46,35 @@ class _TreeScreenWidgetState extends State<TreeScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: ListBuilderState(),
-        ),
-        TextField(
-          controller: _search,
-          onChanged: onQueryChanged,
-          cursorColor: Colors.grey,
-          decoration: InputDecoration(
-            fillColor: Colors.white,
-            filled: true,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide.none),
-            hintText: 'Поиск..',
-            hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-            prefixIcon: Container(
-              padding: EdgeInsets.all(15),
-              child: Icon(Icons.search),
-              width: 12,
-              height: 5,
+    return Scaffold(
+        appBar: AppBar(title: Text('Древо')),
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              child: ListBuilderState(),
             ),
-          ),
-        ),
-      ],
-    );
+            TextField(
+              controller: _search,
+              onChanged: onQueryChanged,
+              cursorColor: Colors.grey,
+              decoration: InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none),
+                hintText: 'Поиск..',
+                hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                prefixIcon: Container(
+                  padding: EdgeInsets.all(15),
+                  child: Icon(Icons.search),
+                  width: 12,
+                  height: 5,
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 }
 
