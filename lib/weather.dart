@@ -7,17 +7,12 @@ import 'tree.dart';
 import 'vlc.dart';
 import 'news.dart';
 
-// погода окно
-class MyWeatherPage extends StatefulWidget {
-  const MyWeatherPage({super.key, required this.title});
-
-  final String title;
-
+class WeatherScreenWidget extends StatefulWidget {
   @override
-  State<MyWeatherPage> createState() => _MyWeatherPageState();
+  _WeatherScreenWidgetState createState() => _WeatherScreenWidgetState();
 }
 
-class _MyWeatherPageState extends State<MyWeatherPage> {
+class _WeatherScreenWidgetState extends State<WeatherScreenWidget> {
   static String arrayObjsT = '{"weather": []}';
 
   var tableObjsJson = jsonDecode(arrayObjsT)['weather'] as List;
@@ -48,78 +43,70 @@ class _MyWeatherPageState extends State<MyWeatherPage> {
           if (snapshot.hasError)
             return Center(child: Text('Error: ${snapshot.error}'));
           else {
-            return Scaffold(
-              appBar: AppBar(
-                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                title: Text(widget.title),
-              ),
-              body: Center(
-                child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
-                    itemCount: tableObjsJson.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Card(
-                        child: Column(
-                          children: [
-                            ListTile(
-                              //leading: CircleAvatar(child: Text('C')),
-                              title: Column(
-                                children: [
-                                  Text(
-                                    tableObjsJson[index]["city"] as String,
-                                    style: const TextStyle(
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    tableObjsJson[index]["temperature"]
-                                        as String,
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              subtitle: Center(
-                                child: Text(
-                                  tableObjsJson[index]["short"] as String,
-                                  style: const TextStyle(fontSize: 8),
+            return Center(
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: tableObjsJson.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            //leading: CircleAvatar(child: Text('C')),
+                            title: Column(
+                              children: [
+                                Text(
+                                  tableObjsJson[index]["city"] as String,
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                              ),
-
-                              //trailing: Icon(Icons.favorite_rounded),
-                              //isThreeLine: true,
-                              onTap: () {
-                                AlertDialog alert = AlertDialog(
-                                  title: Column(
-                                    children: [
-                                      Text(
-                                        tableObjsJson[index]["temperature"]
-                                            as String,
-                                        style: const TextStyle(fontSize: 24),
-                                      ),
-                                      Text(
-                                        tableObjsJson[index]["short"] as String,
-                                        style: const TextStyle(fontSize: 24),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return alert;
-                                  },
-                                );
-                              },
+                                Text(
+                                  tableObjsJson[index]["temperature"] as String,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      );
-                    }),
-              ),
-              bottomNavigationBar: NavigationExample(),
-            ); // snapshot.data  :- get your object which is pass from your downloadData() function
+                            subtitle: Center(
+                              child: Text(
+                                tableObjsJson[index]["short"] as String,
+                                style: const TextStyle(fontSize: 8),
+                              ),
+                            ),
+
+                            //trailing: Icon(Icons.favorite_rounded),
+                            //isThreeLine: true,
+                            onTap: () {
+                              AlertDialog alert = AlertDialog(
+                                title: Column(
+                                  children: [
+                                    Text(
+                                      tableObjsJson[index]["temperature"]
+                                          as String,
+                                      style: const TextStyle(fontSize: 24),
+                                    ),
+                                    Text(
+                                      tableObjsJson[index]["short"] as String,
+                                      style: const TextStyle(fontSize: 24),
+                                    ),
+                                  ],
+                                ),
+                              );
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+            );
           }
         }
       },

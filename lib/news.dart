@@ -10,17 +10,12 @@ import 'tree.dart';
 import 'vlc.dart';
 import 'weather.dart';
 
-// новости окно
-class MySecondPage extends StatefulWidget {
-  const MySecondPage({super.key, required this.title});
-
-  final String title;
-
+class NewsScreenWidget extends StatefulWidget {
   @override
-  State<MySecondPage> createState() => _MySecondPageState();
+  _NewsScreenWidgetState createState() => _NewsScreenWidgetState();
 }
 
-class _MySecondPageState extends State<MySecondPage> {
+class _NewsScreenWidgetState extends State<NewsScreenWidget> {
   static String arrayObjsT = '{"news": []}';
   var size_n, height_n, width_n;
 
@@ -56,12 +51,8 @@ class _MySecondPageState extends State<MySecondPage> {
           if (snapshot.hasError)
             return Center(child: Text('Error: ${snapshot.error}'));
           else {
-            return Scaffold(
-              appBar: AppBar(
-                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                title: Text(widget.title),
-              ),
-              body: ListView.builder(
+            return Center(
+              child: ListView.builder(
                   padding: const EdgeInsets.all(8),
                   itemCount: tableObjsJson.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -153,8 +144,7 @@ class _MySecondPageState extends State<MySecondPage> {
                       ),
                     );
                   }),
-              bottomNavigationBar: NavigationExample(),
-            ); // snapshot.data  :- get your object which is pass from your downloadData() function
+            );
           }
         }
       },

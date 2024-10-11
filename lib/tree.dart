@@ -13,24 +13,13 @@ var tableObjsJson = jsonDecode(arrayObjsT)['table'] as List;
 var tableTemp = jsonDecode(arrayObjsT)['table'] as List;
 var obj_person = jsonDecode(arrayObjsT)['table'] as List;
 
-// древо окно
-class MyFourPage extends StatefulWidget {
-  const MyFourPage({super.key, required this.title});
-
-  final String title;
-
+class TreeScreenWidget extends StatefulWidget {
   @override
-  State<MyFourPage> createState() => _MyFourPageState();
+  _TreeScreenWidgetState createState() => _TreeScreenWidgetState();
 }
 
-class _MyFourPageState extends State<MyFourPage> {
-  // static String arrayObjsT = '{"table": []}';
-
+class _TreeScreenWidgetState extends State<TreeScreenWidget> {
   final _search = TextEditingController();
-
-  //var tableObjsJson = jsonDecode(arrayObjsT)['table'] as List;
-
-  //var tableTemp = jsonDecode(arrayObjsT)['table'] as List;
 
   void onQueryChanged(String query) {
     print(_search.text);
@@ -57,43 +46,32 @@ class _MyFourPageState extends State<MyFourPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Center(
-          child: Text(widget.title),
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: ListBuilderState(),
         ),
-      ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: ListBuilderState(),
-          ),
-          TextField(
-            controller: _search,
-            onChanged: onQueryChanged,
-            cursorColor: Colors.grey,
-            decoration: InputDecoration(
-              fillColor: Colors.white,
-              filled: true,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none),
-              hintText: 'Поиск..',
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-              prefixIcon: Container(
-                padding: EdgeInsets.all(15),
-                child: Icon(Icons.search),
-                width: 12,
-                height: 5,
-              ),
+        TextField(
+          controller: _search,
+          onChanged: onQueryChanged,
+          cursorColor: Colors.grey,
+          decoration: InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none),
+            hintText: 'Поиск..',
+            hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+            prefixIcon: Container(
+              padding: EdgeInsets.all(15),
+              child: Icon(Icons.search),
+              width: 12,
+              height: 5,
             ),
           ),
-        ],
-      ),
-
-      //ListBuilderState(),
-      bottomNavigationBar: NavigationExample(),
+        ),
+      ],
     );
   }
 }
