@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bottom Navigation Bar Example',
+      title: 'Анчих1',
       home: BottomNavExample(),
     );
   }
