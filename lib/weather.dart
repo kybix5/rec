@@ -8,6 +8,9 @@ import 'vlc.dart';
 import 'news.dart';
 
 class WeatherScreenWidget extends StatefulWidget {
+  final Function(int) onTabChanged;
+
+  WeatherScreenWidget({required this.onTabChanged});
   @override
   _WeatherScreenWidgetState createState() => _WeatherScreenWidgetState();
 }
@@ -43,74 +46,70 @@ class _WeatherScreenWidgetState extends State<WeatherScreenWidget> {
           if (snapshot.hasError)
             return Center(child: Text('Error: ${snapshot.error}'));
           else {
-            return Scaffold(
-                appBar: AppBar(title: Text('Погода')),
-                body: Center(
-                  child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemCount: tableObjsJson.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Card(
-                          child: Column(
-                            children: [
-                              ListTile(
-                                //leading: CircleAvatar(child: Text('C')),
+            return Center(
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(8),
+                  itemCount: tableObjsJson.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      child: Column(
+                        children: [
+                          ListTile(
+                            //leading: CircleAvatar(child: Text('C')),
+                            title: Column(
+                              children: [
+                                Text(
+                                  tableObjsJson[index]["city"] as String,
+                                  style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  tableObjsJson[index]["temperature"] as String,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            subtitle: Center(
+                              child: Text(
+                                tableObjsJson[index]["short"] as String,
+                                style: const TextStyle(fontSize: 8),
+                              ),
+                            ),
+
+                            //trailing: Icon(Icons.favorite_rounded),
+                            //isThreeLine: true,
+                            onTap: () {
+                              AlertDialog alert = AlertDialog(
                                 title: Column(
                                   children: [
                                     Text(
-                                      tableObjsJson[index]["city"] as String,
-                                      style: const TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
                                       tableObjsJson[index]["temperature"]
                                           as String,
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                      style: const TextStyle(fontSize: 24),
+                                    ),
+                                    Text(
+                                      tableObjsJson[index]["short"] as String,
+                                      style: const TextStyle(fontSize: 24),
                                     ),
                                   ],
                                 ),
-                                subtitle: Center(
-                                  child: Text(
-                                    tableObjsJson[index]["short"] as String,
-                                    style: const TextStyle(fontSize: 8),
-                                  ),
-                                ),
-
-                                //trailing: Icon(Icons.favorite_rounded),
-                                //isThreeLine: true,
-                                onTap: () {
-                                  AlertDialog alert = AlertDialog(
-                                    title: Column(
-                                      children: [
-                                        Text(
-                                          tableObjsJson[index]["temperature"]
-                                              as String,
-                                          style: const TextStyle(fontSize: 24),
-                                        ),
-                                        Text(
-                                          tableObjsJson[index]["short"]
-                                              as String,
-                                          style: const TextStyle(fontSize: 24),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return alert;
-                                    },
-                                  );
+                              );
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return alert;
                                 },
-                              ),
-                            ],
+                              );
+                            },
                           ),
-                        );
-                      }),
-                ));
+                        ],
+                      ),
+                    );
+                  }),
+            );
           }
         }
       },

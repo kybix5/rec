@@ -16,45 +16,41 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Bottom Navigation Bar Example',
-      home: HomeScreen(),
+      home: BottomNavExample(),
     );
   }
 }
 
-class HomeScreen extends StatefulWidget {
+class BottomNavExample extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _BottomNavExampleState createState() => _BottomNavExampleState();
 }
 
-int _selectedIndex = 0;
-Widget getWidgetForIndex(int index) {
-  switch (index) {
-    case 0:
-      return HomeScreenWidget();
-    case 1:
-      return CameraScreenWidget();
-    case 2:
-      return TreeScreenWidget();
-    case 3:
-      return NewsScreenWidget();
-    case 4:
-      return WeatherScreenWidget();
-    case 5:
-      return MessageScreenWidget();
-    default:
-      return HomeScreenWidget();
-  }
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _selectedIndex = 0;
+class _BottomNavExampleState extends State<BottomNavExample> {
+  int _currentIndex = 0;
 
   var size, height, width;
 
-  void _onItemTapped(int index) {
+  void _onTabChanged(int index) {
     setState(() {
-      _selectedIndex = index; // Обновляем индекс выбранной вкладки
+      _currentIndex = index; // Обновляем индекс выбранной вкладки
     });
+  }
+
+  // Список экранов
+  late final List<Widget> _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      HomeScreenWidget(onTabChanged: _onTabChanged),
+      CameraScreenWidget(onTabChanged: _onTabChanged),
+      TreeScreenWidget(onTabChanged: _onTabChanged),
+      NewsScreenWidget(onTabChanged: _onTabChanged),
+      WeatherScreenWidget(onTabChanged: _onTabChanged),
+      MessageScreenWidget(onTabChanged: _onTabChanged),
+    ];
   }
 
   @override
@@ -128,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Анчих'),
       ),
       drawer: myDrawer,
-      body: getWidgetForIndex(_selectedIndex), // Получаем виджет по индексу
+      body: _screens[_currentIndex], // Получаем виджет по индексу
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -165,9 +161,9 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'смс',
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: _currentIndex,
         selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
+        onTap: _onTabChanged,
       ),
     );
   }

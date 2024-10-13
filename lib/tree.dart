@@ -14,6 +14,9 @@ var tableTemp = jsonDecode(arrayObjsT)['table'] as List;
 var obj_person = jsonDecode(arrayObjsT)['table'] as List;
 
 class TreeScreenWidget extends StatefulWidget {
+  final Function(int) onTabChanged;
+
+  TreeScreenWidget({required this.onTabChanged});
   @override
   _TreeScreenWidgetState createState() => _TreeScreenWidgetState();
 }
@@ -46,35 +49,33 @@ class _TreeScreenWidgetState extends State<TreeScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('Древо')),
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: ListBuilderState(),
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: ListBuilderState(),
+        ),
+        TextField(
+          controller: _search,
+          onChanged: onQueryChanged,
+          cursorColor: Colors.grey,
+          decoration: InputDecoration(
+            fillColor: Colors.white,
+            filled: true,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none),
+            hintText: 'Поиск..',
+            hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+            prefixIcon: Container(
+              padding: EdgeInsets.all(15),
+              child: Icon(Icons.search),
+              width: 12,
+              height: 5,
             ),
-            TextField(
-              controller: _search,
-              onChanged: onQueryChanged,
-              cursorColor: Colors.grey,
-              decoration: InputDecoration(
-                fillColor: Colors.white,
-                filled: true,
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none),
-                hintText: 'Поиск..',
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
-                prefixIcon: Container(
-                  padding: EdgeInsets.all(15),
-                  child: Icon(Icons.search),
-                  width: 12,
-                  height: 5,
-                ),
-              ),
-            ),
-          ],
-        ));
+          ),
+        ),
+      ],
+    );
   }
 }
 

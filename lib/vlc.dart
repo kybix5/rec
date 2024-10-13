@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 
 class CameraScreenWidget extends StatefulWidget {
+  final Function(int) onTabChanged;
+
+  CameraScreenWidget({required this.onTabChanged});
   @override
   _CameraScreenWidgetState createState() => _CameraScreenWidgetState();
 }
@@ -46,36 +49,33 @@ class _CameraScreenWidgetState extends State<CameraScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(title: Text('камера')),
-        body: Center(
-          child: Column(
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: VlcPlayer(
+              controller: _videoPlayerController,
+              aspectRatio: 16 / 9,
+              placeholder: Center(child: CircularProgressIndicator()),
+            ),
+          ),
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(
-                child: VlcPlayer(
-                  controller: _videoPlayerController,
-                  aspectRatio: 16 / 9,
-                  placeholder: Center(child: CircularProgressIndicator()),
-                ),
+              TextButton(
+                onPressed: _playVideo,
+                child:
+                    Icon(Icons.play_arrow, size: 28, color: _buttonColorPlay),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: _playVideo,
-                    child: Icon(Icons.play_arrow,
-                        size: 28, color: _buttonColorPlay),
-                  ),
-                  TextButton(
-                    onPressed: _pauseVideo,
-                    child:
-                        Icon(Icons.pause, size: 28, color: _buttonColorPause),
-                  ),
-                ],
+              TextButton(
+                onPressed: _pauseVideo,
+                child: Icon(Icons.pause, size: 28, color: _buttonColorPause),
               ),
             ],
           ),
-        ));
+        ],
+      ),
+    );
   }
 }
