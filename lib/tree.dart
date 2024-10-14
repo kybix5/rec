@@ -14,9 +14,6 @@ var tableTemp = jsonDecode(arrayObjsT)['table'] as List;
 var obj_person = jsonDecode(arrayObjsT)['table'] as List;
 
 class TreeScreenWidget extends StatefulWidget {
-  final Function(int) onTabChanged;
-
-  TreeScreenWidget({required this.onTabChanged});
   @override
   _TreeScreenWidgetState createState() => _TreeScreenWidgetState();
 }

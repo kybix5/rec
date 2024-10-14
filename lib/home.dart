@@ -4,6 +4,7 @@ import 'vlc.dart';
 import 'news.dart';
 import 'weather.dart';
 import 'tree.dart';
+import 'massege.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   final Function(int) onTabChanged;
@@ -71,7 +72,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             children: [
                               Ink.image(
                                 image: const NetworkImage(
-                                  'https://parik123.nethouse.ru/static/img/0000/0007/4203/74203883.jjd8539p5b.W665.jpg',
+                                  'https://anchih.e-rec.ru/api/jpg/camera.jpg',
                                 ),
                                 height: height / 4,
                                 width: width / 2.5,
@@ -102,7 +103,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   //width: width / 2.5,
                   //height: height / 3,
                   child: Material(
-                    color: Colors.yellow,
+                    color: Colors.purple,
                     elevation: 100,
                     shadowColor: Colors.blue,
                     borderRadius: BorderRadius.circular(28),
@@ -118,7 +119,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             children: [
                               Ink.image(
                                 image: const NetworkImage(
-                                  'https://flomaster.top/uploads/posts/2023-10/1697495070_flomaster-top-p-drevo-rodoslovnoe-risunok-instagram-2.jpg',
+                                  'https://anchih.e-rec.ru/api/jpg/tree.jpg',
                                 ),
                                 height: height / 4,
                                 width: width / 2.5,
@@ -161,7 +162,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   //width: width / 2.5,
                   //height: height / 3,
                   child: Material(
-                    color: Colors.yellow,
+                    color: Colors.purple,
                     elevation: 100,
                     shadowColor: Colors.blue,
                     borderRadius: BorderRadius.circular(28),
@@ -177,7 +178,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             children: [
                               Ink.image(
                                 image: const NetworkImage(
-                                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlsFj9c_fnn37WyQR0aqNNb3o3rRvjc9SYqhlKFMywtjbjrcIxJHLxsJs2akLOL7HvxJo&usqp=CAU',
+                                  'https://anchih.e-rec.ru/api/jpg/news.jpeg',
                                 ),
                                 height: height / 4,
                                 width: width / 2.5,
@@ -208,7 +209,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   //width: width / 2.5,
                   //height: height / 3,
                   child: Material(
-                    color: Colors.yellow,
+                    color: Colors.purple,
                     elevation: 100,
                     shadowColor: Colors.blue,
                     borderRadius: BorderRadius.circular(28),
@@ -224,7 +225,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                             children: [
                               Ink.image(
                                 image: const NetworkImage(
-                                  'https://play-lh.googleusercontent.com/yXfCpQijMAa6f4thnannzhFNXsk9w-uj0W6rOM4hPaZ2pGqClRDWSfMk4yYzqtqR1-FH',
+                                  'https://anchih.e-rec.ru/api/jpg/wh.png',
                                 ),
                                 height: height / 4,
                                 width: width / 2.5,
@@ -255,9 +256,6 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 }
 
 class MessageScreenWidget extends StatelessWidget {
-  final Function(int) onTabChanged;
-
-  MessageScreenWidget({required this.onTabChanged});
   @override
   Widget build(BuildContext context) {
     return const Center(

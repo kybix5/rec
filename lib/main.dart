@@ -5,6 +5,7 @@ import 'tree.dart';
 import 'vlc.dart';
 import 'news.dart';
 import 'weather.dart';
+import 'massege.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,11 +46,11 @@ class _BottomNavExampleState extends State<BottomNavExample> {
     super.initState();
     _screens = [
       HomeScreenWidget(onTabChanged: _onTabChanged),
-      CameraScreenWidget(onTabChanged: _onTabChanged),
-      TreeScreenWidget(onTabChanged: _onTabChanged),
-      NewsScreenWidget(onTabChanged: _onTabChanged),
-      WeatherScreenWidget(onTabChanged: _onTabChanged),
-      MessageScreenWidget(onTabChanged: _onTabChanged),
+      CameraScreenWidget(),
+      TreeScreenWidget(),
+      NewsScreenWidget(),
+      WeatherScreenWidget(),
+      MessageWidget()
     ];
   }
 

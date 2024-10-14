@@ -11,10 +11,6 @@ import 'vlc.dart';
 import 'weather.dart';
 
 class NewsScreenWidget extends StatefulWidget {
-  final Function(int) onTabChanged;
-
-  NewsScreenWidget({required this.onTabChanged});
-
   @override
   _NewsScreenWidgetState createState() => _NewsScreenWidgetState();
 }

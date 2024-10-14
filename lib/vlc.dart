@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 
 class CameraScreenWidget extends StatefulWidget {
-  final Function(int) onTabChanged;
-
-  CameraScreenWidget({required this.onTabChanged});
   @override
   _CameraScreenWidgetState createState() => _CameraScreenWidgetState();
 }
