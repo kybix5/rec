@@ -46,33 +46,36 @@ class _CameraScreenWidgetState extends State<CameraScreenWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: VlcPlayer(
-              controller: _videoPlayerController,
-              aspectRatio: 16 / 9,
-              placeholder: Center(child: CircularProgressIndicator()),
-            ),
-          ),
-          Row(
+    return Scaffold(
+        appBar: AppBar(title: Text('Kамера')),
+        body: Center(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(
-                onPressed: _playVideo,
-                child:
-                    Icon(Icons.play_arrow, size: 28, color: _buttonColorPlay),
+              Center(
+                child: VlcPlayer(
+                  controller: _videoPlayerController,
+                  aspectRatio: 16 / 9,
+                  placeholder: Center(child: CircularProgressIndicator()),
+                ),
               ),
-              TextButton(
-                onPressed: _pauseVideo,
-                child: Icon(Icons.pause, size: 28, color: _buttonColorPause),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: _playVideo,
+                    child: Icon(Icons.play_arrow,
+                        size: 28, color: _buttonColorPlay),
+                  ),
+                  TextButton(
+                    onPressed: _pauseVideo,
+                    child:
+                        Icon(Icons.pause, size: 28, color: _buttonColorPause),
+                  ),
+                ],
               ),
             ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }

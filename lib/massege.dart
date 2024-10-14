@@ -15,6 +15,7 @@ class _MessageWidgetState extends State<MessageWidget> {
   List<String> messages = [];
   List<String> sender = [];
   List<String> created = [];
+  final ScrollController _scrollController = ScrollController();
 
   void _sendMessage(String message) async {
     final sender_in = 'Вы';
@@ -42,6 +43,9 @@ class _MessageWidgetState extends State<MessageWidget> {
       messages.add(message);
       created.add(created_at);
     });
+
+    // Прокрутка вниз после отправки сообщения
+    _scrollToBottom();
   }
 
   void _fetchMessages() async {
@@ -55,7 +59,7 @@ class _MessageWidgetState extends State<MessageWidget> {
         final encryptedMessage = jsonMessage['message'];
         final sender_in = jsonMessage['sender'];
         final created_at = jsonMessage['created_at'];
-        print(sender_in);
+
         // Дешифрование сообщения
         final encrypter =
             encrypt.Encrypter(encrypt.AES(encrypt.Key.fromUtf8(_key)));
@@ -68,6 +72,15 @@ class _MessageWidgetState extends State<MessageWidget> {
         });
       }
     }
+
+    // Прокрутка вниз после загрузки сообщений
+    _scrollToBottom();
+  }
+
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
+    }
   }
 
   @override
@@ -78,79 +91,84 @@ class _MessageWidgetState extends State<MessageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemCount: messages.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Card(
-                  child: ListTile(
-                    title: Text(
-                      sender[index] as String,
-                      style: const TextStyle(fontSize: 10, color: Colors.blue),
-                    ),
-                    subtitle: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                messages[index] as String, // Время
-                                style: const TextStyle(
-                                    fontSize: 14, color: Colors.black),
+    return Scaffold(
+      appBar: AppBar(title: Text('Сообшения')),
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+                controller: _scrollController,
+                padding: const EdgeInsets.all(8),
+                itemCount: messages.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child: ListTile(
+                      title: Text(
+                        sender[index] as String,
+                        style:
+                            const TextStyle(fontSize: 10, color: Colors.blue),
+                      ),
+                      subtitle: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  messages[index] as String, // Время
+                                  style: const TextStyle(
+                                      fontSize: 14, color: Colors.black),
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              '', // Время
-                              style: TextStyle(fontSize: 8, color: Colors.grey),
-                            ),
-                            Text(
-                              created[index] as String, // Дата
-                              style: TextStyle(fontSize: 8, color: Colors.grey),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                '', // Время
+                                style:
+                                    TextStyle(fontSize: 8, color: Colors.grey),
+                              ),
+                              Text(
+                                created[index] as String, // Дата
+                                style:
+                                    TextStyle(fontSize: 8, color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      onTap: () {},
                     ),
-                    onTap: () {},
-                  ),
-                );
-              }),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: _controller,
-                  decoration: InputDecoration(
-                    hintText: "Введите сообщение...",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
+                  );
+                }),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    decoration:
+                        InputDecoration(hintText: 'Введите сообщение..'),
                   ),
                 ),
-              ),
-              IconButton(
-                icon: Icon(Icons.send),
-                onPressed: () {
-                  _sendMessage(_controller.text);
-                  _controller.clear();
-                },
-              ),
-            ],
+                IconButton(
+                  icon: Icon(Icons.send),
+                  onPressed: () {
+                    if (_controller.text.isNotEmpty) {
+                      _sendMessage(_controller.text);
+                      _controller.clear();
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

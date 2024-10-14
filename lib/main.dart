@@ -154,11 +154,8 @@ class _BottomNavExampleState extends State<BottomNavExample> {
             label: 'Погода',
           ),
           BottomNavigationBarItem(
-            icon: Badge(
-              label: Text('new'),
-              backgroundColor: Colors.green,
-              child: Icon(Icons.messenger_sharp),
-            ),
+            icon: Icon(Icons.messenger_sharp),
+            backgroundColor: Colors.green,
             label: 'смс',
           ),
         ],
