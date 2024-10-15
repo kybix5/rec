@@ -74,8 +74,10 @@ class _MessageWidgetState extends State<MessageWidget> {
       }
     }
 
-    // Прокрутка вниз после загрузки сообщений
-    _scrollToBottom();
+    // Прокрутка вниз после завершения всех обновлений состояния
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollToBottom();
+    });
   }
 
   void _scrollToBottom() {
@@ -171,5 +173,11 @@ class _MessageWidgetState extends State<MessageWidget> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 }
