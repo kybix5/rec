@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
 
-import 'main.dart';
-import 'tree.dart';
-import 'vlc.dart';
-import 'news.dart';
-
 class WeatherScreenWidget extends StatefulWidget {
+  const WeatherScreenWidget({super.key});
+
   @override
   _WeatherScreenWidgetState createState() => _WeatherScreenWidgetState();
 }
@@ -24,7 +21,7 @@ class _WeatherScreenWidgetState extends State<WeatherScreenWidget> {
     // sends the request
     var response = await request.close();
     // transforms and prints the response
-    await for (var contents in response.transform(Utf8Decoder())) {
+    await for (var contents in response.transform(const Utf8Decoder())) {
       tableObjsJson = jsonDecode(contents)['weather'] as List;
       var getdata = true;
     }
@@ -38,13 +35,13 @@ class _WeatherScreenWidgetState extends State<WeatherScreenWidget> {
       builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
         // AsyncSnapshot<Your object type>
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: Text('Идет загрузка'));
+          return const Center(child: Text('Идет загрузка'));
         } else {
-          if (snapshot.hasError)
+          if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
-          else {
+          } else {
             return Scaffold(
-                appBar: AppBar(title: Text('Погода')),
+                appBar: AppBar(title: const Text('Погода')),
                 body: Center(
                   child: ListView.builder(
                       padding: const EdgeInsets.all(8),

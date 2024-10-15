@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
-import 'vlc.dart';
-import 'news.dart';
-import 'weather.dart';
-import 'tree.dart';
-import 'massege.dart';
 
 class HomeScreenWidget extends StatefulWidget {
   final Function(int) onTabChanged;
-  HomeScreenWidget({required this.onTabChanged});
+  const HomeScreenWidget({super.key, required this.onTabChanged});
 
   @override
   _HomeScreenWidgetState createState() =>
@@ -29,7 +23,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     return Center(
         child: Stack(fit: StackFit.expand, children: <Widget>[
       Image(
-        image: AssetImage('assets/images/gory.jpg'),
+        image: const AssetImage('assets/images/gory.jpg'),
         width: width,
         height: height,
         fit: BoxFit.fill,
@@ -38,7 +32,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         //mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(
-            child: Container(
+            child: SizedBox(
               width: width / 15,
               height: height / 40,
             ),
@@ -47,7 +41,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             child: Row(
               children: [
                 SizedBox(
-                  child: Container(
+                  child: SizedBox(
                     width: width / 15,
                     height: height / 20,
                   ),
@@ -94,7 +88,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   ),
                 ),
                 SizedBox(
-                  child: Container(
+                  child: SizedBox(
                     width: width / 15,
                     height: height / 20,
                   ),
@@ -144,7 +138,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             ),
           ),
           SizedBox(
-            child: Container(
+            child: SizedBox(
               width: width / 15,
               height: height / 40,
             ),
@@ -153,7 +147,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             child: Row(
               children: [
                 SizedBox(
-                  child: Container(
+                  child: SizedBox(
                     width: width / 15,
                     height: height / 20,
                   ),
@@ -200,7 +194,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   ),
                 ),
                 SizedBox(
-                  child: Container(
+                  child: SizedBox(
                     width: width / 15,
                     height: height / 20,
                   ),
@@ -256,6 +250,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
 }
 
 class MessageScreenWidget extends StatelessWidget {
+  const MessageScreenWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const Center(

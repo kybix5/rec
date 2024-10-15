@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:typed_data';
 
 class MessageWidget extends StatefulWidget {
+  const MessageWidget({super.key});
+
   @override
   _MessageWidgetState createState() => _MessageWidgetState();
 }
@@ -18,8 +19,8 @@ class _MessageWidgetState extends State<MessageWidget> {
   final ScrollController _scrollController = ScrollController();
 
   void _sendMessage(String message) async {
-    final sender_in = 'Вы';
-    final created_at = '0.0';
+    const senderIn = 'Вы';
+    const createdAt = '0.0';
     final iv = encrypt.IV.fromLength(16);
     final encrypter =
         encrypt.Encrypter(encrypt.AES(encrypt.Key.fromUtf8(_key)));
@@ -39,9 +40,9 @@ class _MessageWidgetState extends State<MessageWidget> {
     );
 
     setState(() {
-      sender.add(sender_in);
+      sender.add(senderIn);
       messages.add(message);
-      created.add(created_at);
+      created.add(createdAt);
     });
 
     // Прокрутка вниз после отправки сообщения
@@ -57,8 +58,8 @@ class _MessageWidgetState extends State<MessageWidget> {
       for (var jsonMessage in jsonMessages) {
         final iv = encrypt.IV.fromBase64(jsonMessage['iv']);
         final encryptedMessage = jsonMessage['message'];
-        final sender_in = jsonMessage['sender'];
-        final created_at = jsonMessage['created_at'];
+        final senderIn = jsonMessage['sender'];
+        final createdAt = jsonMessage['created_at'];
 
         // Дешифрование сообщения
         final encrypter =
@@ -66,9 +67,9 @@ class _MessageWidgetState extends State<MessageWidget> {
         final decrypted = encrypter.decrypt64(encryptedMessage, iv: iv);
 
         setState(() {
-          sender.add(sender_in);
+          sender.add(senderIn);
           messages.add(decrypted);
-          created.add(created_at);
+          created.add(createdAt);
         });
       }
     }
@@ -92,7 +93,7 @@ class _MessageWidgetState extends State<MessageWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Сообшения')),
+      appBar: AppBar(title: const Text('Сообшения')),
       body: Column(
         children: [
           Expanded(
@@ -104,7 +105,7 @@ class _MessageWidgetState extends State<MessageWidget> {
                   return Card(
                     child: ListTile(
                       title: Text(
-                        sender[index] as String,
+                        sender[index],
                         style:
                             const TextStyle(fontSize: 10, color: Colors.blue),
                       ),
@@ -115,7 +116,7 @@ class _MessageWidgetState extends State<MessageWidget> {
                             children: [
                               Expanded(
                                 child: Text(
-                                  messages[index] as String, // Время
+                                  messages[index], // Время
                                   style: const TextStyle(
                                       fontSize: 14, color: Colors.black),
                                 ),
@@ -131,9 +132,9 @@ class _MessageWidgetState extends State<MessageWidget> {
                                     TextStyle(fontSize: 8, color: Colors.grey),
                               ),
                               Text(
-                                created[index] as String, // Дата
-                                style:
-                                    TextStyle(fontSize: 8, color: Colors.grey),
+                                created[index], // Дата
+                                style: const TextStyle(
+                                    fontSize: 8, color: Colors.grey),
                               ),
                             ],
                           ),
@@ -152,11 +153,11 @@ class _MessageWidgetState extends State<MessageWidget> {
                   child: TextField(
                     controller: _controller,
                     decoration:
-                        InputDecoration(hintText: 'Введите сообщение..'),
+                        const InputDecoration(hintText: 'Введите сообщение..'),
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () {
                     if (_controller.text.isNotEmpty) {
                       _sendMessage(_controller.text);

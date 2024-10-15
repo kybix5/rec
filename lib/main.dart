@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home.dart'; // Импортируем файл с виджетами
+import 'home.dart';
 import 'tree.dart';
 import 'vlc.dart';
 import 'news.dart';
@@ -8,7 +8,7 @@ import 'weather.dart';
 import 'massege.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,6 +23,8 @@ class MyApp extends StatelessWidget {
 }
 
 class BottomNavExample extends StatefulWidget {
+  const BottomNavExample({super.key});
+
   @override
   _BottomNavExampleState createState() => _BottomNavExampleState();
 }
@@ -69,7 +71,7 @@ class _BottomNavExampleState extends State<BottomNavExample> {
       elevation: 0,
       child: Column(
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             child: Icon(
               Icons.settings_rounded,
               size: 64,
@@ -79,7 +81,7 @@ class _BottomNavExampleState extends State<BottomNavExample> {
             padding: tilePadding,
             child: ListTile(
               // onTap: naveel_camera,
-              leading: Icon(Icons.home),
+              leading: const Icon(Icons.home),
               title: Text(
                 'L O G I N',
                 style: drawerTextColor,
@@ -89,7 +91,7 @@ class _BottomNavExampleState extends State<BottomNavExample> {
           Padding(
             padding: tilePadding,
             child: ListTile(
-              leading: Icon(Icons.settings),
+              leading: const Icon(Icons.settings),
               title: Text(
                 'S E T T I N G S',
                 style: drawerTextColor,
@@ -99,7 +101,7 @@ class _BottomNavExampleState extends State<BottomNavExample> {
           Padding(
             padding: tilePadding,
             child: ListTile(
-              leading: Icon(Icons.info),
+              leading: const Icon(Icons.info),
               title: Text(
                 'A B O U T',
                 style: drawerTextColor,
@@ -109,7 +111,7 @@ class _BottomNavExampleState extends State<BottomNavExample> {
           Padding(
             padding: tilePadding,
             child: ListTile(
-              leading: Icon(Icons.logout),
+              leading: const Icon(Icons.logout),
               title: Text(
                 'L O G O U T',
                 style: drawerTextColor,
@@ -122,7 +124,7 @@ class _BottomNavExampleState extends State<BottomNavExample> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Анчих'),
+        title: const Text('Анчих'),
       ),
       drawer: myDrawer,
       body: _screens[_currentIndex], // Получаем виджет по индексу

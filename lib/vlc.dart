@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vlc_player/flutter_vlc_player.dart';
 
 class CameraScreenWidget extends StatefulWidget {
+  const CameraScreenWidget({super.key});
+
   @override
   _CameraScreenWidgetState createState() => _CameraScreenWidgetState();
 }
@@ -47,7 +49,7 @@ class _CameraScreenWidgetState extends State<CameraScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Kамера')),
+        appBar: AppBar(title: const Text('Kамера')),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +58,7 @@ class _CameraScreenWidgetState extends State<CameraScreenWidget> {
                 child: VlcPlayer(
                   controller: _videoPlayerController,
                   aspectRatio: 16 / 9,
-                  placeholder: Center(child: CircularProgressIndicator()),
+                  placeholder: const Center(child: CircularProgressIndicator()),
                 ),
               ),
               Row(

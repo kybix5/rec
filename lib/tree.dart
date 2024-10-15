@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rec/vlc.dart';
 import 'dart:io';
 import 'dart:convert';
-
-import 'main.dart';
-import 'vlc.dart';
-import 'news.dart';
-import 'weather.dart';
 
 String arrayObjsT = '{"table": []}';
 var tableObjsJson = jsonDecode(arrayObjsT)['table'] as List;
@@ -14,6 +8,8 @@ var tableTemp = jsonDecode(arrayObjsT)['table'] as List;
 var obj_person = jsonDecode(arrayObjsT)['table'] as List;
 
 class TreeScreenWidget extends StatefulWidget {
+  const TreeScreenWidget({super.key});
+
   @override
   _TreeScreenWidgetState createState() => _TreeScreenWidgetState();
 }
@@ -47,10 +43,10 @@ class _TreeScreenWidgetState extends State<TreeScreenWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text('Древо')),
+        appBar: AppBar(title: const Text('Древо')),
         body: Column(
           children: <Widget>[
-            Expanded(
+            const Expanded(
               child: ListBuilderState(),
             ),
             TextField(
@@ -64,12 +60,12 @@ class _TreeScreenWidgetState extends State<TreeScreenWidget> {
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide.none),
                 hintText: 'Поиск..',
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 10),
+                hintStyle: const TextStyle(color: Colors.grey, fontSize: 10),
                 prefixIcon: Container(
-                  padding: EdgeInsets.all(15),
-                  child: Icon(Icons.search),
+                  padding: const EdgeInsets.all(15),
                   width: 12,
                   height: 5,
+                  child: Icon(Icons.search),
                 ),
               ),
             ),
@@ -95,7 +91,7 @@ class _ListBuilderState extends State<ListBuilderState> {
       // sends the request
       var response = await request.close();
       // transforms and prints the response
-      await for (var contents in response.transform(Utf8Decoder())) {
+      await for (var contents in response.transform(const Utf8Decoder())) {
         tableObjsJson = jsonDecode(contents)['table'] as List;
         tableTemp = jsonDecode(contents)['table'] as List;
       }
@@ -110,19 +106,19 @@ class _ListBuilderState extends State<ListBuilderState> {
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           // AsyncSnapshot<Your object type>
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: Text('Идет загрузка...'));
+            return const Center(child: Text('Идет загрузка...'));
           } else {
-            if (snapshot.hasError)
+            if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
-            else {
+            } else {
               return Center(
                 child: ListView.builder(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   itemCount: tableTemp.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
                       child: ListTile(
-                        leading: Icon(Icons.man),
+                        leading: const Icon(Icons.man),
                         title: Text(tableTemp[index]["name"]),
                         // ignore: prefer_interpolation_to_compose_strings
                         subtitle: Text(
@@ -155,12 +151,12 @@ class _alert_list extends StatelessWidget {
   _alert_list(this.id_person);
 
   Future<String> get_person() async {
-    var request = await HttpClient().getUrl(
-        Uri.parse('https://anchih.e-rec.ru/api/person?id=' + id_person));
+    var request = await HttpClient()
+        .getUrl(Uri.parse('https://anchih.e-rec.ru/api/person?id=$id_person'));
     // sends the request
     var response = await request.close();
     // transforms and prints the response
-    await for (var contents in response.transform(Utf8Decoder())) {
+    await for (var contents in response.transform(const Utf8Decoder())) {
       obj_person = jsonDecode(contents)['person'] as List;
     }
     return Future.value("Data download"); // return your response
@@ -173,11 +169,11 @@ class _alert_list extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
           // AsyncSnapshot<Your object type>
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: Text('Идет загрузка...'));
+            return const Center(child: Text('Идет загрузка...'));
           } else {
-            if (snapshot.hasError)
+            if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
-            else {
+            } else {
               return AlertDialog(
                 title: Center(
                   child: Column(

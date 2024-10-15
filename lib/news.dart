@@ -1,14 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-
 import 'dart:io';
 import 'dart:convert';
-
-import 'main.dart';
-import 'tree.dart';
-import 'vlc.dart';
-import 'weather.dart';
 
 class NewsScreenWidget extends StatefulWidget {
   @override
