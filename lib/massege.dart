@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:device_info_plus/device_info_plus.dart';
 
 class MessageWidget extends StatefulWidget {
   const MessageWidget({super.key});
@@ -12,21 +13,49 @@ class MessageWidget extends StatefulWidget {
 
 class _MessageWidgetState extends State<MessageWidget> {
   final TextEditingController _controller = TextEditingController();
+
   final String _key = 'my32lengthsupersecretnooneknows1'; // 32 байта
   List<String> messages = [];
   List<String> sender = [];
   List<String> created = [];
   final ScrollController _scrollController = ScrollController();
 
+  Future<void> getDeviceId() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    String? deviceId;
+
+    // Получаем информацию о платформе
+    if (Theme.of(context).platform == TargetPlatform.android) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      String dev = androidInfo.toString();
+      print(dev);
+      //  String deviceId = androidInfo.androidId;
+      // Уникальный идентификатор для Android
+    } else if (Theme.of(context).platform == TargetPlatform.iOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      deviceId =
+          iosInfo.identifierForVendor; // Уникальный идентификатор для iOS
+    }
+    print('Device ID: $deviceId');
+  }
+
   void _sendMessage(String message) async {
+    if (message.isEmpty) return; // Проверка на пустое сообщение
     const senderIn = 'Вы';
-    const createdAt = '0.0';
+    final createdAt = DateTime.now().toIso8601String().split('.')[0];
     final iv = encrypt.IV.fromLength(16);
     final encrypter =
         encrypt.Encrypter(encrypt.AES(encrypt.Key.fromUtf8(_key)));
 
     // Шифрование сообщения
     final encrypted = encrypter.encrypt(message, iv: iv);
+
+    print(encrypted.base64);
+    print('--');
+    print(iv.base64);
+
+    getDeviceId();
 
     // Отправка на сервер
     await http.post(
@@ -44,6 +73,13 @@ class _MessageWidgetState extends State<MessageWidget> {
       messages.add(message);
       created.add(createdAt);
     });
+
+    // Прокрутка вниз к последнему сообщению
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
 
     // Прокрутка вниз после отправки сообщения
     _scrollToBottom();
@@ -64,13 +100,18 @@ class _MessageWidgetState extends State<MessageWidget> {
         // Дешифрование сообщения
         final encrypter =
             encrypt.Encrypter(encrypt.AES(encrypt.Key.fromUtf8(_key)));
-        final decrypted = encrypter.decrypt64(encryptedMessage, iv: iv);
+        //final decrypted = encrypter.decrypt64(encryptedMessage, iv: iv);
 
-        setState(() {
-          sender.add(senderIn);
-          messages.add(decrypted);
-          created.add(createdAt);
-        });
+        try {
+          final decrypted = encrypter.decrypt64(encryptedMessage, iv: iv);
+          setState(() {
+            sender.add(senderIn);
+            messages.add(decrypted);
+            created.add(createdAt);
+          });
+        } catch (e) {
+          print('Ошибка дешифрования: $e');
+        }
       }
     }
 

@@ -6,6 +6,7 @@ import 'vlc.dart';
 import 'news.dart';
 import 'weather.dart';
 import 'massege.dart';
+import 'profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,12 +32,20 @@ class BottomNavExample extends StatefulWidget {
 
 class _BottomNavExampleState extends State<BottomNavExample> {
   int _currentIndex = 0;
+  int _currentNavigator = 0;
 
   var size, height, width;
 
   void _onTabChanged(int index) {
     setState(() {
-      _currentIndex = index; // Обновляем индекс выбранной вкладки
+      _currentNavigator = index; // Обновляем индекс выбранной вкладки
+      if (index == 6) {
+        _currentIndex = 0; // Сбрасываем текущий индекс на 0
+
+        Navigator.pop(context); // Закрыть Drawer
+      } else {
+        _currentIndex = index; // Устанавливаем текущий индекс на выбранный
+      }
     });
   }
 
@@ -52,7 +61,8 @@ class _BottomNavExampleState extends State<BottomNavExample> {
       TreeScreenWidget(),
       NewsScreenWidget(),
       WeatherScreenWidget(),
-      MessageWidget()
+      MessageWidget(),
+      ProfileSettings(),
     ];
   }
 
@@ -92,6 +102,9 @@ class _BottomNavExampleState extends State<BottomNavExample> {
             padding: tilePadding,
             child: ListTile(
               leading: const Icon(Icons.settings),
+              onTap: () {
+                _onTabChanged(6);
+              },
               title: Text(
                 'S E T T I N G S',
                 style: drawerTextColor,
@@ -127,7 +140,7 @@ class _BottomNavExampleState extends State<BottomNavExample> {
         title: const Text('Анчих'),
       ),
       drawer: myDrawer,
-      body: _screens[_currentIndex], // Получаем виджет по индексу
+      body: _screens[_currentNavigator], // Получаем виджет по индексу
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -161,7 +174,7 @@ class _BottomNavExampleState extends State<BottomNavExample> {
             label: 'смс',
           ),
         ],
-        currentIndex: _currentIndex,
+        currentIndex: _currentIndex, //какая ячейка будет выделенна
         selectedItemColor: Colors.blue,
         onTap: _onTabChanged,
       ),
