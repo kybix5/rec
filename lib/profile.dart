@@ -15,7 +15,10 @@ class _ProfileSettingsState extends State<ProfileSettings> {
   String _email = '';
   String _firstName = '';
   String _lastName = '';
-  File? _image;
+
+  String? _imageUrl =
+      'https://anchih.e-rec.ru/api/jpg/photo.jpeg'; // Переменная для хранения URL изображения
+  File? _image; // Переменная для хранения локального изображения
 
   Future<void> _pickImage() async {
     final picker = ImagePicker();
@@ -81,10 +84,15 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               GestureDetector(
                 onTap: _pickImage,
                 child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: _image != null ? FileImage(_image!) : null,
-                  child:
-                      _image == null ? Icon(Icons.camera_alt, size: 50) : null,
+                  radius: 100,
+                  backgroundImage: _image != null
+                      ? FileImage(_image!)
+                      : _imageUrl != null
+                          ? NetworkImage(_imageUrl!)
+                          : null,
+                  child: _image == null && _imageUrl == null
+                      ? Icon(Icons.camera_alt, size: 50)
+                      : null,
                 ),
               ),
               SizedBox(height: 20),

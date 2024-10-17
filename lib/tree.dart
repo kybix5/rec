@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart'; // Add this line at the top of your file
 
 String arrayObjsT = '{"table": []}';
 var tableObjsJson = jsonDecode(arrayObjsT)['table'] as List;
@@ -125,15 +127,32 @@ class _ListBuilderState extends State<ListBuilderState> {
                           "${"Возрасть:" + tableTemp[index]["age"]} год.рождения:" +
                               tableTemp[index]["birthday"],
                         ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.info),
-                          onPressed: () {
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return _alert_list(tableTemp[index]["n_id"]);
-                                });
-                          },
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.account_circle),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return add_person(
+                                          tableTemp[index]["n_id"]);
+                                    });
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.info),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return _alert_list(
+                                          tableTemp[index]["n_id"]);
+                                    });
+                              },
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -217,6 +236,168 @@ class _alert_list extends StatelessWidget {
                     ],
                   ),
                 ),
+              );
+            }
+          }
+        });
+  }
+}
+
+class add_person extends StatefulWidget {
+  String id_person;
+  add_person(this.id_person);
+
+  @override
+  _add_person createState() => _add_person(id_person);
+}
+
+class _add_person extends State<add_person> {
+  String id_person;
+  _add_person(this.id_person);
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController surnameController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
+  final TextEditingController relationController = TextEditingController();
+
+  final TextEditingController _ageController = TextEditingController();
+  DateTime? _selectedDate;
+
+  String? selectedRelation; // Для хранения выбранного значения
+
+  List<String> relations = [
+    'Семья',
+    'Друг',
+    'Коллега',
+    'Знакомый',
+  ];
+
+  Future<String> get_person() async {
+    var request = await HttpClient()
+        .getUrl(Uri.parse('https://anchih.e-rec.ru/api/person?id=$id_person'));
+    // sends the request
+    var response = await request.close();
+    // transforms and prints the response
+    await for (var contents in response.transform(const Utf8Decoder())) {
+      obj_person = jsonDecode(contents)['person'] as List;
+    }
+    return Future.value("Data download"); // return your response
+  }
+
+  Future<void> _sendDataToServer(
+      String name, String surname, String age, String relation) async {
+    final response = await http.post(
+      Uri.parse('https://your-api-url.com/endpoint'), // Замените на ваш URL
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'name': name,
+        'surname': surname,
+        'age': age,
+        'relation': relation,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      // Успешно отправлено
+      print('Данные успешно отправлены');
+    } else {
+      // Ошибка при отправке
+      print('Ошибка при отправке данных: ${response.statusCode}');
+    }
+  }
+
+  @override
+  void dispose() {
+    _ageController.dispose();
+    super.dispose();
+  }
+
+  void _presentDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    ).then((pickedDate) {
+      if (pickedDate == null) return;
+      setState(() {
+        _selectedDate = pickedDate;
+        _ageController.text = DateFormat('yyyy').format(_selectedDate!);
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<String>(
+        future: get_person(), // function where you call your api
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          // AsyncSnapshot<Your object type>
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: Text('Идет загрузка...'));
+          } else {
+            if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else {
+              return AlertDialog(
+                title: Text('Введите данные'),
+                content: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: nameController,
+                        decoration: InputDecoration(labelText: 'Имя'),
+                      ),
+                      TextField(
+                        controller: surnameController,
+                        decoration: InputDecoration(labelText: 'Фамилия'),
+                      ),
+                      TextField(
+                        controller: _ageController,
+                        decoration: InputDecoration(labelText: 'Год рождения'),
+                        keyboardType: TextInputType.number,
+                        readOnly: true, // Запретить ввод текста
+                        onTap:
+                            _presentDatePicker, // Открыть календарь при нажатии
+                      ),
+                      DropdownButtonFormField<String>(
+                        value: selectedRelation,
+                        decoration: InputDecoration(labelText: 'Отношение'),
+                        items: relations.map((String relation) {
+                          return DropdownMenuItem<String>(
+                            value: relation,
+                            child: Text(relation),
+                          );
+                        }).toList(),
+                        onChanged: (String? newValue) {
+                          selectedRelation = newValue;
+                        },
+                      )
+                    ],
+                  ),
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Отмена'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      _sendDataToServer(
+                        nameController.text,
+                        surnameController.text,
+                        ageController.text,
+                        relationController.text,
+                      );
+                      Navigator.of(context).pop();
+                    },
+                    child: Text('Отправить'),
+                  ),
+                ],
               );
             }
           }
