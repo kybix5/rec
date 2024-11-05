@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'tree.dart';
 import 'vlc.dart';
-import 'news.dart';
+//import 'news.dart';
 import 'weather.dart';
 import 'massege.dart';
 import 'profile.dart';
@@ -59,7 +59,7 @@ class _BottomNavExampleState extends State<BottomNavExample> {
       HomeScreenWidget(onTabChanged: _onTabChanged),
       CameraScreenWidget(),
       TreeScreenWidget(),
-      NewsScreenWidget(),
+      //NewsScreenWidget(),
       WeatherScreenWidget(),
       MessageWidget(),
       ProfileSettings(),
@@ -158,11 +158,11 @@ class _BottomNavExampleState extends State<BottomNavExample> {
             backgroundColor: Colors.green,
             label: 'Древо',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.fiber_new_sharp),
-            backgroundColor: Colors.green,
-            label: 'Новости',
-          ),
+          //BottomNavigationBarItem(
+          //  icon: Icon(Icons.fiber_new_sharp),
+          //  backgroundColor: Colors.green,
+          //  label: 'Новости',
+          //),
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud_queue_outlined),
             backgroundColor: Colors.green,
