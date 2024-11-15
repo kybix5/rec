@@ -10,6 +10,7 @@ class CameraScreenWidget extends StatefulWidget {
 
 class _CameraScreenWidgetState extends State<CameraScreenWidget> {
   bool _isPlaying = true;
+  bool _isError = false;
 
   final VlcPlayerController _videoPlayerController =
       VlcPlayerController.network(
