@@ -10,11 +10,11 @@ class CameraScreenWidget extends StatefulWidget {
 
 class _CameraScreenWidgetState extends State<CameraScreenWidget> {
   bool _isPlaying = true;
-  bool _isError = false;
+  bool _isError = false; // Новое состояние для отслеживания ошибок
 
-  final VlcPlayerController _videoPlayerController =
-      VlcPlayerController.network(
+  final VlcPlayerController _videoPlayerController = VlcPlayerController.network(
     'rtsp://46.16.226.6:554/user=user&password=&channel=1&stream=0',
+    //'http://media.w3.org/2010/05/bunny/movie.mp4',
     hwAcc: HwAcc.full,
     autoPlay: true,
     options: VlcPlayerOptions(),
@@ -23,10 +23,9 @@ class _CameraScreenWidgetState extends State<CameraScreenWidget> {
   Color _buttonColorPlay = Colors.green;
   Color _buttonColorPause = Colors.black;
 
-@override
+  @override
   void initState() {
     super.initState();
-    
     // Добавляем слушателя для отслеживания состояния потока
     _videoPlayerController.addListener(() {
       if (_videoPlayerController.value.hasError) {
@@ -36,7 +35,7 @@ class _CameraScreenWidgetState extends State<CameraScreenWidget> {
       }
     });
   }
-  
+
   @override
   void dispose() {
     _videoPlayerController.dispose();
@@ -62,7 +61,7 @@ class _CameraScreenWidgetState extends State<CameraScreenWidget> {
     });
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Камера')),
@@ -88,13 +87,11 @@ class _CameraScreenWidgetState extends State<CameraScreenWidget> {
               children: [
                 TextButton(
                   onPressed: _isError ? null : _playVideo, // Деактивируем кнопку воспроизведения при ошибке
-                  child: Icon(Icons.play_arrow,
-                      size: 28, color: _buttonColorPlay),
+                  child: Icon(Icons.play_arrow, size: 28, color: _buttonColorPlay),
                 ),
                 TextButton(
                   onPressed: _isError ? null : _pauseVideo, // Деактивируем кнопку паузы при ошибке
-                  child:
-                      Icon(Icons.pause, size: 28, color: _buttonColorPause),
+                  child: Icon(Icons.pause, size: 28, color: _buttonColorPause),
                 ),
               ],
             ),
